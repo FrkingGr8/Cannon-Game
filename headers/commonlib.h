@@ -1,6 +1,7 @@
 #include <iostream>
 #include <tuple>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 struct coord{
@@ -8,4 +9,4 @@ struct coord{
 };
 
 typedef tuple<coord,coord,coord> CANNON;
-typedef tuple<char,coord,char,coord> MOVE;
+typedef tuple<char,int,int,char,int,int> MOVE;
