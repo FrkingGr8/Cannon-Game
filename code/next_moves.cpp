@@ -1,23 +1,23 @@
 #include "next_moves.h"
 
-coord test(int a){
-  coord c;
-  c.x = a+1;
-  c.y = a+10;
-  return c;
-}
-
-
-int main(){
-  int a;
-  coord b;
-  cin >> a;
-  // b.x = a;
-  // b.y = a+1;
-  b = test(a);
-  cout<<b.y<<'\n';
-  return 0;
-}
+// coord test(int a){
+//   coord c;
+//   c.x = a+1;
+//   c.y = a+10;
+//   return c;
+// }
+//
+//
+// int main(){
+//   int a;
+//   coord b;
+//   cin >> a;
+//   // b.x = a;
+//   // b.y = a+1;
+//   b = test(a);
+//   cout<<b.y<<'\n';
+//   return 0;
+// }
 
 
 bool contains(coord ele, vector<coord> list){
