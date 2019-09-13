@@ -18,7 +18,7 @@ vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int 
   vector<coord> correct_moves;
   for (int i = 0; i< moves.size(); i++){
   	coord a = moves[i];
-  	if (a.x < n  && a.y < m){
+  	if (a.x < n  && a.y < m && a.x >= 0 && a.y >= 0){
       if (contains(a,soldier_list) == false){
         correct_moves.push_back(a);
       }
