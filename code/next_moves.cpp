@@ -8,16 +8,22 @@
 // }
 //
 // //
-// int main(){
-//   int a;
-//   coord b;
-//   cin >> a;
-//   // b.x = a;
-//   // b.y = a+1;
-//   b = test(a);
-//   cout<<b.y<<'\n';
-//   return 0;
-// }
+int main(){
+  coord a,b,c;
+  a.x = 0;
+  a.y = 0;
+  b.x = 1;
+  b.y = 1;
+  c.x = 2;
+  c.y = 2;
+  int d = orientation(make_tuple(a,b,c));
+  cout<<d;
+  // b.x = a;
+  // b.y = a+1;
+  // b = test(a);
+  // cout<<b.y<<'\n';
+  return 0;
+}
 //
 
 

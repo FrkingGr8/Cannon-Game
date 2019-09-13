@@ -14,7 +14,7 @@ bool contains(coord ele, vector<coord> list){
 
 
 //removes moves which go outside the board or on a team soldier.
-vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int n = 8, int m = 8){
+vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int n, int m){
   vector<coord> correct_moves;
   for (int i = 0; i< moves.size(); i++){
   	coord a = moves[i];
