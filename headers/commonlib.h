@@ -10,8 +10,6 @@ struct coord{
   int x,y;
 };
 
-int board[8][8];
-
 typedef tuple<coord,coord,coord> CANNON;
 typedef tuple<char,int,int,char,int,int> MOVE;
 

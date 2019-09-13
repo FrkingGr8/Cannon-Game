@@ -11,17 +11,16 @@ struct coord{
 typedef tuple<coord,coord,coord> CANNON;
 typedef tuple<char, int, int, char, int, int> MOVE;
 
-int board[8][8];
-
-void initialise();
-tuple<vector<CANNON>, vector<CANNON> > Update_C_list(MOVE);
-tuple<vector<CANNON>, vector<CANNON> > Update(int, MOVE);
-vector<CANNON> Get_list(int);
-
+vector<vector<int> > initialise();
+tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> >);
+vector<CANNON> Get_list(int, vector<vector<int> >);
+void Update_board(MOVE, vector<vector<int> > &board);
+vector<coord> Soldiers_list(int, vector<vector<int> >);
 bool Search(vector<CANNON>, CANNON);
 
-void print_board();
+void print_board(vector<vector<int> >);
 void print_cannon(vector<CANNON>);
+void print_soldier(vector<coord>);
 
 
 int main(){
@@ -29,21 +28,31 @@ int main(){
     tuple<vector<CANNON>, vector<CANNON> > ans;
     MOVE move = make_tuple('s', 2, 1, 'm', 3, 1);
 
-    initialise();
+    vector<vector<int> > board = initialise();
+    Update_board(move, board);
 
-    ans = Update_C_list(move);
+    ans = Update(board);
 
-    print_board();
+    vector<coord> t1 = Soldiers_list(-1, board);
+    vector<coord> t2 = Soldiers_list(1, board);
 
+    print_board(board);
+
+    print_soldier(t1);
+    cout<<"----------";
+    print_soldier(t2);
     return 0;
 }
 
 //Initialising the board
-void initialise(){
+vector<vector<int> > initialise(){
+    vector<vector<int> > board;
     for(int i = 0; i<8; i++){
+        vector<int> temp;
         for(int j = 0; j<8; j++){
-            board[i][j] = 0;
+            temp.push_back(0);
         }
+        board.push_back(temp);
     }
     //Position of townhall
     board[0][0] = -2; board[0][2] = -2; board[0][4] = -2; board[0][6] = -2;
@@ -61,38 +70,36 @@ void initialise(){
     board[7][4] = 1; board[6][4] = 1; board[5][4] = 1;
     board[7][6] = 1; board[6][6] = 1; board[5][6] = 1;
 
+    return board;
+
 }
 
-tuple<vector<CANNON>, vector<CANNON> > Update_C_list(MOVE move){
-    int x = get<1>(move);
-    int y = get<2>(move);
-    int type = board[x][y];
-
-    return Update(type, move);
-}
-
-tuple<vector<CANNON>, vector<CANNON> > Update(int type, MOVE move){
+void Update_board(MOVE move, vector<vector<int> > &board){
     int src_x = get<1>(move), src_y = get<2>(move);
     int dest_x = get<4>(move), dest_y = get<5>(move);
 
-    //updating the board from the move we get
+    int type = board[src_x][src_y];
 
+    //updating the board from the move we get
     if(get<3>(move) == 'B'){
         board[dest_x][dest_y] = 0;
     }else{
         board[src_x][src_y] = 0;
         board[dest_x][dest_y] = type;
     }
+}
 
-    vector<CANNON> Clist1 = Get_list(type);
-    vector<CANNON> Clist2 = Get_list(-1*type);
+
+tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> > board){
+    vector<CANNON> Clist1 = Get_list(1, board);
+    vector<CANNON> Clist2 = Get_list(-1, board);
     tuple<vector<CANNON>, vector<CANNON> > ans;
     ans = make_tuple(Clist1, Clist2);
 
-    cout<<"Of type:- "<<type<<endl;
+    cout<<"Of type black:- "<<endl;
     //print_cannon(Clist1);
 
-    cout<<"Of type:- "<<-1*type<<endl;
+    cout<<"Of type white:- "<<endl;
     //print_cannon(Clist2);
     
     return ans;
@@ -127,7 +134,7 @@ bool Search(vector<CANNON> list, CANNON temp){
     return false;
 }
 
-vector<CANNON> Get_list(int type){
+vector<CANNON> Get_list(int type, vector<vector<int> > board){
     vector<CANNON> list;
     int n = 8;
     int m = 8;
@@ -249,11 +256,32 @@ void print_cannon(vector<CANNON> list){
 }
 
 
-void print_board(){
+void print_board(vector<vector<int> > board){
     for(int i = 0; i<8; i++){
         for(int j = 0; j<8; j++){
             cout<<board[i][j]<<" ";
         }
         cout<<endl;
+    }
+}
+
+vector<coord> Soldiers_list(int type, vector<vector<int> > board){
+    vector<coord> list;
+    for(int i = 0; i<board.size(); i++){
+        for(int j = 0; j<board[0].size(); j++){
+            if(type == board[i][j]){
+                coord t;
+                t.x = i;
+                t.y = j;
+                list.push_back(t);
+            }
+        }
+    }
+    return list;
+}
+
+void print_soldier(vector<coord> t){
+    for(int i = 0; i<t.size(); i++){
+        cout<<t[i].x<<" "<<t[i].y<<endl;
     }
 }
