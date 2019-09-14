@@ -1,16 +1,4 @@
-#include "commonlib.h"
-
-vector<vector<int> > initialise();
-tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> >);
-vector<CANNON> Get_list(int, vector<vector<int> >);
-vector<vector<int> > Update_board(MOVE, vector<vector<int> >);
-vector<coord> Soldiers_list(int, vector<vector<int> >);
-bool Search(vector<CANNON>, CANNON);
-
-void print_board(vector<vector<int> >);
-void print_cannon(vector<CANNON>);
-void print_soldier(vector<coord>);
-
+#include "cannon_list.h"
 //Initialising the board
 vector<vector<int> > initialise(){
     vector<vector<int> > board;
@@ -41,6 +29,7 @@ vector<vector<int> > initialise(){
 
 }
 
+//Changes the board after a MOVE
 vector<vector<int> > Update_board(MOVE move, vector<vector<int> > temp){
     vector<vector<int> > board = temp;
     int src_x = get<1>(move), src_y = get<2>(move);
@@ -58,7 +47,7 @@ vector<vector<int> > Update_board(MOVE move, vector<vector<int> > temp){
     return temp;
 }
 
-
+//Returns a tuple with black_cannon, white_cannon
 tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> > board){
     vector<CANNON> Clist1 = Get_list(1, board);
     vector<CANNON> Clist2 = Get_list(-1, board);
@@ -70,7 +59,7 @@ tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> > board){
 
     cout<<"Of type white:- "<<endl;
     //print_cannon(Clist2);
-    
+
     return ans;
 }
 
@@ -103,6 +92,7 @@ bool Search(vector<CANNON> list, CANNON temp){
     return false;
 }
 
+//returns cannon list
 vector<CANNON> Get_list(int type, vector<vector<int> > board){
     vector<CANNON> list;
     int n = 8;
@@ -124,13 +114,13 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
-                        //cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;                        
+                        //cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;
                         if(res == false){
                             list.push_back(t);
                             //CANNON temp = list[0];
                             //coord F = get<0>(temp), M = get<1>(temp), L = get<2>(temp);
                             //cout<<list.size()<<endl;
-                            //cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;                        
+                            //cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;
                         }
                     }
 
@@ -138,7 +128,7 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                     F.x = i; F.y = j+1;
                     L.x = i; L.y = j-1;
                     if(board[F.x][F.y] == type && board[L.x][L.y] == type){
-                        //cout<<i<<" "<<j<<" "<<type<<endl;                        
+                        //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
                         if(res == false){
@@ -148,7 +138,7 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
 
                     //Main Diagonal Cannon
                     F.x = i-1; F.y = j-1;
-                    L.x = i+1; L.y = j+1; 
+                    L.x = i+1; L.y = j+1;
                     if(board[F.x][F.y] == type && board[L.x][L.y] == type){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
@@ -178,7 +168,7 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         M.x = i; M.y = j;
                         F.x = i; F.y = j+1;
                         L.x = i; L.y = j-1;
-                        
+
                         if(board[F.x][F.y] == type && board[L.x][L.y] == type){
                             //cout<<i<<" "<<j<<" "<<type<<endl;
                             CANNON t = make_tuple(F, M, L);
@@ -199,7 +189,7 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         L.x = i-1; L.y = j;
 
                         if(board[F.x][F.y] == type && board[L.x][L.y] == type){
-                            //cout<<i<<" "<<j<<" "<<type<<endl;                            
+                            //cout<<i<<" "<<j<<" "<<type<<endl;
                             CANNON t = make_tuple(F, M, L);
                             bool res = Search(list, t);
                             //cout<<res;
@@ -212,7 +202,7 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
             }
         }
     }
-    
+
     return list;
 }
 
@@ -234,6 +224,7 @@ void print_board(vector<vector<int> > board){
     }
 }
 
+//Generates a list of soldiers on the boards given type 1 or -1
 vector<coord> Soldiers_list(int type, vector<vector<int> > board){
     vector<coord> list;
     for(int i = 0; i<board.size(); i++){
