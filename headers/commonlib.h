@@ -6,8 +6,23 @@
 #include <vector>
 
 using namespace std;
+
 struct coord{
   int x,y;
+};
+
+class Node{
+    private:
+        vector<vector<int> > board_config;
+    public:
+        vector<Node*> list;
+
+        void SetBoard(vector<vector<int> > temp){
+            board_config = temp;
+        }
+
+        vector<vector<int> > Get_board(){return board_config;}
+
 };
 
 typedef tuple<coord,coord,coord> CANNON;

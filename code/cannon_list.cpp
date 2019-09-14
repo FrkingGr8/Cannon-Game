@@ -3,7 +3,7 @@
 vector<vector<int> > initialise();
 tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> >);
 vector<CANNON> Get_list(int, vector<vector<int> >);
-void Update_board(MOVE, vector<vector<int> > &board);
+vector<vector<int> > Update_board(MOVE, vector<vector<int> >);
 vector<coord> Soldiers_list(int, vector<vector<int> >);
 bool Search(vector<CANNON>, CANNON);
 
@@ -41,7 +41,8 @@ vector<vector<int> > initialise(){
 
 }
 
-void Update_board(MOVE move, vector<vector<int> > &board){
+vector<vector<int> > Update_board(MOVE move, vector<vector<int> > temp){
+    vector<vector<int> > board = temp;
     int src_x = get<1>(move), src_y = get<2>(move);
     int dest_x = get<4>(move), dest_y = get<5>(move);
 
@@ -54,6 +55,7 @@ void Update_board(MOVE move, vector<vector<int> > &board){
         board[src_x][src_y] = 0;
         board[dest_x][dest_y] = type;
     }
+    return temp;
 }
 
 
