@@ -1,7 +1,5 @@
 #include "soldier.h"
 
-//not done bounding on the size of the board.
-
 
 vector<MOVE> coord_to_move(coord soldier, vector<coord> moves){
   vector<MOVE> mvs ;
