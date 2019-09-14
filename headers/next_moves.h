@@ -4,5 +4,7 @@
 #include "commonlib.h"
 #include "soldier.h"
 #include "cannon.h"
+
 vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, vector<coord> opp_soldier_list, bool black);
+
 #endif

@@ -4,7 +4,7 @@ class Node{
     private:
         vector<vector<int> > board_config;
         vector<Node> children;
-        Node parent;
+        static Node parent;
         bool is_root = true;
     public:
         // Node *list;
@@ -52,3 +52,11 @@ class Node{
         }
 
       };
+
+
+int main(int argc, char const *argv[]) {
+  std::vector<std::vector<int> > board = initialise();
+  cout <<"Working"<<endl;
+
+  return 0;
+}

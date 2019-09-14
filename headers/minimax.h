@@ -2,6 +2,7 @@
 #define MINIMAX_H
 
 #include "commonlib.h"
+#include "node.h"
 
 int Evaluation(int a, int b, int c, int d);
 int minimax(int depth, Node node, bool maximizingPlayer, int values[], int alpha, int beta);
