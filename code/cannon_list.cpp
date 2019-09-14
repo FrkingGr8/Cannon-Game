@@ -54,10 +54,10 @@ tuple<vector<CANNON>, vector<CANNON> > Update(vector<vector<int> > board){
     tuple<vector<CANNON>, vector<CANNON> > ans;
     ans = make_tuple(Clist1, Clist2);
 
-    cout<<"Of type black:- "<<endl;
+    // cout<<"Of type black:- "<<endl;
     //print_cannon(Clist1);
 
-    cout<<"Of type white:- "<<endl;
+    // cout<<"Of type white:- "<<endl;
     //print_cannon(Clist2);
 
     return ans;

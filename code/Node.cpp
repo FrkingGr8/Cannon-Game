@@ -12,8 +12,17 @@ void Node::SetMove(MOVE m){
   move = m;
 }
 
+
+Node* Node::newNode(vector<vector<int> > new_board, MOVE move, bool black ){
+  Node* temp = new Node;
+  (*temp).SetBlack(!black);
+  (*temp).SetBoard(new_board);
+  (*temp).SetMove(move);
+  return temp;
+}
+
+
 //Use this function only once!
-//WHOSE turn is it??
 void Node::SetChildren(){
   vector<coord> black_soldiers = Soldiers_list(1,board_config);
   vector<coord> white_soldiers = Soldiers_list(-1,board_config);
@@ -26,29 +35,17 @@ void Node::SetChildren(){
   }  else{
     next_possibilities = next_moves(get<1>(cannon_lists),white_soldiers,black_soldiers,false);
   }
-
   for (int j =0; j<next_possibilities.size();j++){
     MOVE curr_move = next_possibilities[j];
     vector<vector <int> > new_board =Update_board(curr_move,board_config);
-    Node next_state;
-    next_state.SetBoard(new_board);
-    next_state.SetMove(curr_move);
-    next_state.SetBlack(!(GetBlack()));
-    children.push_back(next_state);
+    // Node* next_state = new Node;
+    //
+    // cout<<&next_state<<endl;
+    // (*next_state).SetBoard(new_board);
+    // (*next_state).SetMove(curr_move);
+    // (*next_state).SetBlack(!(GetBlack()));
+
+    Node* next_state = newNode(board_config,curr_move,GetBlack());
+    (children).push_back(next_state);
   }
-}
-
-
-
-int main(int argc, char const *argv[]) {
-  std::vector<std::vector<int> > board = initialise();
-  Node root;
-  root.SetBoard(board);
-  root.SetChildren();
-  vector<Node> succ = root.GetChildren();
-  Node one = succ[0];
-  cout<< succ<<endl;
-  cout <<"Working"<<endl;
-
-  return 0;
 }

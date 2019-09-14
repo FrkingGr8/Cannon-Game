@@ -8,7 +8,7 @@
 class Node{
     private:
       vector<vector<int> > board_config;
-      vector<Node> children;
+      vector<Node*> children;
       MOVE move;
       bool black = true;
       int eval;
@@ -19,6 +19,8 @@ class Node{
         void SetChildren();
         void SetBlack(bool t);
         void SetMove(MOVE m);
+        Node* newNode(vector<vector<int> > new_board, MOVE move, bool black );
+
         // void SetParent(Node parent_node);
 
         bool GetBlack(){
@@ -27,7 +29,7 @@ class Node{
         vector<vector<int> >GetBoard(){
           return board_config;
         }
-        vector<Node> GetChildren(){
+        vector<Node*> GetChildren(){
           return children;
         }
 
