@@ -9,26 +9,34 @@ class Node{
     private:
       vector<vector<int> > board_config;
       vector<Node> children;
+      MOVE move;
+      bool black = true;
+      int eval;
       // Node parent;
       // bool is_root;
     public:
         void SetBoard(vector<vector<int> > temp);
         void SetChildren();
+        void SetBlack(bool t);
+        void SetMove(MOVE m);
         // void SetParent(Node parent_node);
 
-
+        bool GetBlack(){
+          return black;
+        }
         vector<vector<int> >GetBoard(){
           return board_config;
         }
         vector<Node> GetChildren(){
           return children;
         }
-        // bool GetIsRoot(){
-        //   return is_root;
-        // }
-        // Node GetParent(){
-        //   return parent;
-        // }
+
+        int GetEval(){
+          return eval;
+        }
+        MOVE GetMove(){
+          return move;
+        }
 
 };
 
