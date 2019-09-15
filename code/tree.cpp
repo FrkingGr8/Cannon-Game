@@ -1,33 +1,57 @@
 #include "tree.h"
 
-//expands the children. for d = 1 children of root are leaves.
+//expands the children. for d = 0 children of root are leaves.
 //DONT SET CHILDREN BEFORE CREATE TREE FUNCTION!!
+//d = 2 reasonable
 void create_tree(Node* root,int d){
   (*root).SetChildren();
   while (d != 0){
     d--;
     vector<Node*> succ = (*root).GetChildren();
-    cout<<"Current depth: "<<d+1<<" Number of children = "<<succ.size()<<endl;
+    // cout<<"Current depth: "<<d+1<<" Number of children = "<<succ.size()<<endl;
     for (int k = 0; k<succ.size(); k++){
-
       Node* curr_child = succ[k];
       create_tree(curr_child,d);
     }
   }
 }
 
+void print_board_new(vector<vector<int> > v){
+  for (int i = 0; i< v.size() ; i++){
+    vector<int> ll = v[i];
+    for (int j = 0; j < ll.size();j++){
+      cout<<ll[j]<<"  ";
+    }
+    cout<<endl;
+  }
+}
+
 int main(int argc, char const *argv[]) {
   std::vector<std::vector<int> > board = initialise();
+
   Node root;
   root.SetBoard(board);
+  // print_board_new(root.GetBoard());
   int d;
   cin >>d;
-  create_tree((&root),d);
   // root.SetChildren();
-  //
-  // vector<Node*> succ = root.GetChildren();
-  // // int d = 2;
-  // Node* child = succ[0];
+  create_tree((&root),d);
+  vector<Node*> succ = root.GetChildren();
+  Node* child_1 = succ[0];
+  vector<Node*> succ2 = (*child_1).GetChildren();
+  cout<<succ2.size()<<endl;
+  Node* child_2 = succ2[0];
+  print_board_new((*child_1).GetBoard());
+  cout<<"----------------------------"<<endl;
+  print_board_new((*child_2).GetBoard());
+
+  // int d = 2;
+  // for (int k = 0; k<succ.size(); k++){
+  //   Node* child = succ[k];
+  //   print_board_new((*child).GetBoard());
+  //   cout<<"---------------------------"<<endl;
+  // }
+
   // (*child).SetChildren();
   //
   // // while (d != 0){

@@ -30,21 +30,21 @@ vector<vector<int> > initialise(){
 }
 
 //Changes the board after a MOVE
-vector<vector<int> > Update_board(MOVE move, vector<vector<int> > temp){
+vector<vector<int> > Update_board(MOVE move, vector<vector<int> > temp){//S76M46
     vector<vector<int> > board = temp;
     int src_x = get<1>(move), src_y = get<2>(move);
     int dest_x = get<4>(move), dest_y = get<5>(move);
 
-    int type = board[src_x][src_y];
+    int type = board[src_y][src_x];
 
     //updating the board from the move we get
     if(get<3>(move) == 'B'){
-        board[dest_x][dest_y] = 0;
+        board[dest_y][dest_x] = 0;
     }else{
-        board[src_x][src_y] = 0;
-        board[dest_x][dest_y] = type;
+        board[src_y][src_x] = 0;
+        board[dest_y][dest_x] = type;
     }
-    return temp;
+    return board;
 }
 
 //Returns a tuple with black_cannon, white_cannon
@@ -105,12 +105,12 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                     CANNON temp;
                     coord F, M, L;
 
-                    M.x = i; M.y = j;
+                    M.y = i; M.x = j;
 
-                    //Vertical Cannon
-                    F.x = i+1; F.y = j;
-                    L.x = i-1; L.y = j;
-                    if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                    //Horizontal Cannon
+                    F.y = i+1; F.x = j;
+                    L.y = i-1; L.x = j;
+                    if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
@@ -124,10 +124,10 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         }
                     }
 
-                    //Horizontal Cannon
-                    F.x = i; F.y = j+1;
-                    L.x = i; L.y = j-1;
-                    if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                    //Vertical Cannon
+                    F.y = i; F.x = j+1;
+                    L.y = i; L.x = j-1;
+                    if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
@@ -137,9 +137,9 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                     }
 
                     //Main Diagonal Cannon
-                    F.x = i-1; F.y = j-1;
-                    L.x = i+1; L.y = j+1;
-                    if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                    F.y = i-1; F.x = j-1;
+                    L.y = i+1; L.x = j+1;
+                    if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
@@ -149,9 +149,9 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                     }
 
                     //Secondary Diagonal Cannon
-                    F.x = i-1; F.y = j+1;
-                    L.x = i+1; L.y = j-1;
-                    if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                    F.y = i-1; F.x = j+1;
+                    L.y = i+1; L.x = j-1;
+                    if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                         //cout<<i<<" "<<j<<" "<<type<<endl;
                         CANNON t = make_tuple(F, M, L);
                         bool res = Search(list, t);
@@ -165,11 +165,11 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         continue;
                     }else{
                         coord M, F, L;
-                        M.x = i; M.y = j;
-                        F.x = i; F.y = j+1;
-                        L.x = i; L.y = j-1;
+                        M.y = i; M.x = j;
+                        F.y = i; F.x = j+1;
+                        L.y = i; L.x = j-1;
 
-                        if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                        if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                             //cout<<i<<" "<<j<<" "<<type<<endl;
                             CANNON t = make_tuple(F, M, L);
                             bool res = Search(list, t);
@@ -184,11 +184,11 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
                         continue;
                     }else{
                         coord M, F, L;
-                        M.x = i; M.y = j;
-                        F.x = i+1; F.y = j;
-                        L.x = i-1; L.y = j;
+                        M.y = i; M.x = j;
+                        F.y = i+1; F.x = j;
+                        L.y = i-1; L.x = j;
 
-                        if(board[F.x][F.y] == type && board[L.x][L.y] == type){
+                        if(board[F.y][F.x] == type && board[L.y][L.x] == type){
                             //cout<<i<<" "<<j<<" "<<type<<endl;
                             CANNON t = make_tuple(F, M, L);
                             bool res = Search(list, t);
@@ -231,8 +231,8 @@ vector<coord> Soldiers_list(int type, vector<vector<int> > board){
         for(int j = 0; j<board[0].size(); j++){
             if(type == board[i][j]){
                 coord t;
-                t.x = i;
-                t.y = j;
+                t.x = j;
+                t.y = i;
                 list.push_back(t);
             }
         }
