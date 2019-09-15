@@ -15,7 +15,7 @@ Evaluation function:<br>
 2) No.of Cannons<br>
 3) Opp soldier from townhall<br>
 4) Soldier from Opp townhall<br>
-5)no. of townhall<br>
+5) no. of townhall<br>
 5) soldier of townhall<br>
 6) Opp blocked cannon<br>
 7) no. of moves of soldier (restricted or free)<br>
