@@ -20,6 +20,7 @@ class Node{
         void SetBlack(bool t);
         void SetMove(MOVE m);
         Node* newNode(vector<vector<int> > new_board, MOVE move, bool black );
+        void SetEval(int t);
 
         // void SetParent(Node parent_node);
 

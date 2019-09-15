@@ -14,6 +14,11 @@ void Node::SetMove(MOVE m){
 }
 
 
+void Node::SetEval(int t){
+  eval = t;
+}
+
+
 Node* Node::newNode(vector<vector<int> > new_board, MOVE move, bool black ){
   Node* temp = new Node;
   (*temp).SetBlack(!black);
