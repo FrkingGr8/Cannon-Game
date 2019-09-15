@@ -10,8 +10,4 @@ vector<vector<int> > Update_board(MOVE, vector<vector<int> >);
 vector<coord> Soldiers_list(int, vector<vector<int> >);
 bool Search(vector<CANNON>, CANNON);
 
-void print_board(vector<vector<int> >);
-void print_cannon(vector<CANNON>);
-void print_soldier(vector<coord>);
-
 #endif

@@ -26,3 +26,34 @@ vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int 
   }
 	return correct_moves;
 }
+
+void print_cannon(vector<CANNON> list){
+    for(int i = 0; i<list.size(); i++){
+        CANNON temp = list[i];
+        coord F = get<0>(temp), M = get<1>(temp), L = get<2>(temp);
+        cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;
+    }
+}
+
+
+void print_board(vector<vector<int> > board){
+    for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+            cout<<board[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+
+void print_soldier(vector<coord> t){
+    for(int i = 0; i<t.size(); i++){
+        cout<<t[i].x<<" "<<t[i].y<<endl;
+    }
+}
+
+
+
+void print_move(MOVE m){
+  cout<<get<0>(m)<<get<1>(m)<<get<2>(m)<<get<3>(m)<<get<4>(m)<<get<5>(m)<<endl;
+}

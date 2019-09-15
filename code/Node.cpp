@@ -24,6 +24,7 @@ Node* Node::newNode(vector<vector<int> > new_board, MOVE move, bool black ){
   (*temp).SetBlack(!black);
   (*temp).SetBoard(new_board);
   (*temp).SetMove(move);
+  // print_move((*temp).GetMove());
   return temp;
 }
 

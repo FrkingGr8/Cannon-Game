@@ -206,24 +206,6 @@ vector<CANNON> Get_list(int type, vector<vector<int> > board){
     return list;
 }
 
-void print_cannon(vector<CANNON> list){
-    for(int i = 0; i<list.size(); i++){
-        CANNON temp = list[i];
-        coord F = get<0>(temp), M = get<1>(temp), L = get<2>(temp);
-        cout<<F.x<<" "<<F.y<<" -> "<<M.x<<" "<<M.y<<" -> "<<L.x<<" "<<L.y<<endl;
-    }
-}
-
-
-void print_board(vector<vector<int> > board){
-    for(int i = 0; i<8; i++){
-        for(int j = 0; j<8; j++){
-            cout<<board[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
-
 //Generates a list of soldiers on the boards given type 1 or -1
 vector<coord> Soldiers_list(int type, vector<vector<int> > board){
     vector<coord> list;
@@ -238,10 +220,4 @@ vector<coord> Soldiers_list(int type, vector<vector<int> > board){
         }
     }
     return list;
-}
-
-void print_soldier(vector<coord> t){
-    for(int i = 0; i<t.size(); i++){
-        cout<<t[i].x<<" "<<t[i].y<<endl;
-    }
 }

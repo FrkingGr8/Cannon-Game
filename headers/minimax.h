@@ -5,7 +5,7 @@
 #include "node.h"
 
 int Evaluation(int a, int b, int c, int d);
-int minimax( Node* node, bool maximizingPlayer, int alpha, int beta);
+tuple<int,MOVE> minimax( Node* node, bool maximizingPlayer, int alpha, int beta);
 
 // Initial values of
 // Aplha and Beta

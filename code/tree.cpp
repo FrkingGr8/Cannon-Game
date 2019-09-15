@@ -36,9 +36,8 @@ int main(int argc, char const *argv[]) {
   cin >>d;
   // root.SetChildren();
   create_tree((&root),d);
-  int test = minimax(&root,true,-1000,1000);
-  cout<<test<<endl;
-  cout<< (*(root.GetChildren())[0]).GetEval()<<endl;
+  tuple<int,MOVE> test = minimax(&root,true,-1000,1000);
+  // cout<<test<<endl;
   // vector<Node*> succ = root.GetChildren();
   // Node* child_1 = succ[0];
   // vector<Node*> succ2 = (*child_1).GetChildren();
