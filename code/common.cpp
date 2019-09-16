@@ -57,3 +57,7 @@ void print_soldier(vector<coord> t){
 void print_move(MOVE m){
   cout<<get<0>(m)<<" "<<get<1>(m)<<" "<<get<2>(m)<<" "<<get<3>(m)<<" "<<get<4>(m)<<" "<<get<5>(m)<<endl;
 }
+
+void printerr_move(MOVE m){
+  cerr<<get<0>(m)<<" "<<get<1>(m)<<" "<<get<2>(m)<<" "<<get<3>(m)<<" "<<get<4>(m)<<" "<<get<5>(m)<<endl;
+}
