@@ -1,5 +1,5 @@
-#include "commonlib.h"
-#include "cannon_list.h"
+#include "Evaluation.h"
+
 
 int Eval(vector<vector<int> > board, tuple<vector<CANNON>, vector<CANNON> > cannon_list, int type){
     vector<coord> Black_S_list = Soldiers_list(1, board);
@@ -38,4 +38,48 @@ int Eval(vector<vector<int> > board, tuple<vector<CANNON>, vector<CANNON> > cann
         town = abs(board[0][0]/2) + abs(board[0][2]/2) + abs(board[0][4]/2) + abs(board[0][6]/2);
     }
 
+}
+
+
+int blocked_cannon(vector<coord>soldier_list,vector<coord>opp_soldier_list,vector<CANNON>cannon_list){
+  int number=0;
+  vector<coord> blocked_positions;
+  for (int j = 0; j< cannon_list.size(); j++){
+    CANNON curr_cannon = cannon_list[j];
+    coord mid_ele = get<1>(curr_cannon);
+    int orie = orientation(curr_cannon);
+    if (orie == 0){
+      coord bp1= {mid_ele.x-2,mid_ele.y};
+      coord bp2= {mid_ele.x+2,mid_ele.y};
+      blocked_positions.push_back(bp1);
+      blocked_positions.push_back(bp2);
+    }else if (orie == 1){
+      coord bp1= {mid_ele.x,mid_ele.y-2};
+      coord bp2= {mid_ele.x,mid_ele.y+2};
+      blocked_positions.push_back(bp1);
+      blocked_positions.push_back(bp2);
+    }else if (orie == 2){
+      coord bp1= {mid_ele.x-2,mid_ele.y+2};
+      coord bp2= {mid_ele.x+2,mid_ele.y-2};
+      blocked_positions.push_back(bp1);
+      blocked_positions.push_back(bp2);
+    }else{
+      coord bp1= {mid_ele.x-2,mid_ele.y-2};
+      coord bp2= {mid_ele.x+2,mid_ele.y+2};
+      blocked_positions.push_back(bp1);
+      blocked_positions.push_back(bp2);
+    }
+  }
+
+
+  for (int k = 0; k < opp_soldier_list.size(); k++){
+    coord soldier = opp_soldier_list[k];
+    for (int i = 0; i < blocked_positions.size(); i++){
+      coord curr_pos = blocked_positions[i];
+      if (soldier.x == curr_pos.x && soldier.y == curr_pos.y){
+          number++;
+      }
+    }
+  }
+  return number;
 }
