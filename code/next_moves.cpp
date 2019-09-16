@@ -1,16 +1,43 @@
 #include "next_moves.h"
 
+tuple<vector<coord>,vector<coord> > create_th_list(){
+  coord a,b,c,d,e,f,g,h;
+  //White TH
+  a = {0,0};
+  b = {2,0};
+  c = {4,0};
+  d = {6,0};
+  //Black TH
+  e = {1,7};
+  f = {3,7};
+  g = {5,7};
+  h = {7,7};
+  vector<coord> white_th = {a,b,c,d};
+  vector<coord> black_th = {e,f,g,h};
+  return (make_tuple(white_th,black_th));
+}
+
 vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, vector<coord> opp_soldier_list, bool black) {
   int l = 8;
   int b = 8;
   vector<MOVE> possibilities;
   MOVE curr_move;
+  tuple<vector<coord>,vector<coord> > tup = create_th_list();
+  vector<coord> white_town_halls = get<0>(tup);
+  vector<coord> black_town_halls = get<1>(tup);
+  vector<coord>own_town_halls;
+  if (black){
+    own_town_halls = black_town_halls;
+  } else{
+    own_town_halls = white_town_halls;
+  }
 
   //individual soldier's moves
   for (int i = 0; i < soldier_list.size(); i++){
     coord curr_sold = soldier_list[i];
     vector<coord> all_mov = soldier_moves(curr_sold, opp_soldier_list, black);
-    vector<coord> fil_mov = moves_filter(all_mov,soldier_list,l,b);
+    vector<coord> fil_mov = moves_filter(all_mov,soldier_list,l,b); //Not on your own soldiers.
+    fil_mov = moves_filter(fil_mov,own_town_halls,l,b);  //Not on your own town halls.
     vector<MOVE> curr_sol_moves = coord_to_move(curr_sold,fil_mov);
     possibilities.reserve(possibilities.size() + distance(curr_sol_moves.begin(),curr_sol_moves.end()));
     possibilities.insert(possibilities.end(),curr_sol_moves.begin(), curr_sol_moves.end());
