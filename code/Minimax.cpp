@@ -1,4 +1,5 @@
 #include "minimax.h"
+#include "Evaluation.h"
 
 int Evaluation(int a, int b, int c, int d){
     return a + b + c + d;
@@ -9,7 +10,14 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta)
   vector<Node*> list = (*node).GetChildren();
 
     if ((*node).GetChildren().size() == 0){
-        int t = Evaluation(1,2,3,4);
+        vector<vector<int> > board = (*node).GetBoard();
+        int typ;
+        if((*node).GetBlack()){
+            typ = 1;
+        }else{
+            typ = -1;
+        }
+        float t = Eval(board, typ);
         (*node).SetEval(t);
         // cout<<t<<" "<<(*node).GetEval()<<endl;
         // print_move((*node).GetMove());

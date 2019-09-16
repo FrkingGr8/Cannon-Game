@@ -14,7 +14,7 @@ void Node::SetMove(MOVE m){
 }
 
 
-void Node::SetEval(int t){
+void Node::SetEval(float t){
   eval = t;
 }
 

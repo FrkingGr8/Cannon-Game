@@ -11,7 +11,7 @@ class Node{
       vector<Node*> children;
       MOVE move;
       bool black = true;
-      int eval;
+      float eval;
       // Node parent;
       // bool is_root;
     public:
@@ -20,7 +20,7 @@ class Node{
         void SetBlack(bool t);
         void SetMove(MOVE m);
         Node* newNode(vector<vector<int> > new_board, MOVE move, bool black );
-        void SetEval(int t);
+        void SetEval(float t);
 
         // void SetParent(Node parent_node);
 
@@ -34,7 +34,7 @@ class Node{
           return children;
         }
 
-        int GetEval(){
+        float GetEval(){
           return eval;
         }
         MOVE GetMove(){
