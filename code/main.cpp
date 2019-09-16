@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]) {
   cerr<<player<<" "<<tl<<" "<<n<<" "<<m<<endl;
   Node curr_root;
   // cerr <<"tst"<<endl;
-  if (player == 0){
+  if (player == 1){
       my_turn = true; //my_color = black
       curr_root.SetBlack(true);
   }else{
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
   while (true){
     // cerr<<"Tes5t"<<endl;
     if (my_turn == false){
-      cerr<<"Move from computer: "<<my_turn<<endl;
+      //cerr<<"Move from computer: "<<my_turn<<endl;
       char t[10];
       cin >> f;
       // cerr<< f;
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
       cin >> c;
       cin >> d;
       
-      cerr <<"testing "<<f<<endl;
+      //cerr <<"testing "<<f<<endl;
       // cin.getline(t, 10);
       // cerr<<"yoyoyo"<<t<<endl;
       // string temp;
