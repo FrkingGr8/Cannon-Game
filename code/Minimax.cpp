@@ -12,7 +12,7 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta)
         int t = Evaluation(1,2,3,4);
         (*node).SetEval(t);
         // cout<<t<<" "<<(*node).GetEval()<<endl;
-        print_move((*node).GetMove());
+        // print_move((*node).GetMove());
         tuple<int,MOVE> tmp = make_tuple(t,(*node).GetMove());
         return tmp;
 

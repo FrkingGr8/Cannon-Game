@@ -26,47 +26,47 @@ void print_board_new(vector<vector<int> > v){
   }
 }
 
-int main(int argc, char const *argv[]) {
-  std::vector<std::vector<int> > board = initialise();
-
-  Node root;
-  root.SetBoard(board);
-  // print_board_new(root.GetBoard());
-  int d;
-  cin >>d;
-  // root.SetChildren();
-  create_tree((&root),d);
-  tuple<int,MOVE> test = minimax(&root,true,-1000,1000);
-  // cout<<test<<endl;
-  // vector<Node*> succ = root.GetChildren();
-  // Node* child_1 = succ[0];
-  // vector<Node*> succ2 = (*child_1).GetChildren();
-  // cout<<succ2.size()<<endl;
-  // Node* child_2 = succ2[0];
-  // print_board_new((*child_1).GetBoard());
-  // cout<<"----------------------------"<<endl;
-  // print_board_new((*child_2).GetBoard());
-
-  // int d = 2;
-  // for (int k = 0; k<succ.size(); k++){
-  //   Node* child = succ[k];
-  //   print_board_new((*child).GetBoard());
-  //   cout<<"---------------------------"<<endl;
-  // }
-
-  // (*child).SetChildren();
-  //
-  // // while (d != 0){
-  // //   for (int k = 0; k < succ.size(); k++){
-  // //       Node curr_child = succ[k];
-  // //   }
-  // //
-  // // }
-  // Node* one = succ[0];
-  // vector<Node*> n = (*one).GetChildren();
-  // cout<<n.size()<<endl;
-  // cout<< succ<<endl;
-  cout <<"Working"<<endl;
-
-  return 0;
-}
+// int main(int argc, char const *argv[]) {
+//   std::vector<std::vector<int> > board = initialise();
+//
+//   Node root;
+//   root.SetBoard(board);
+//   // print_board_new(root.GetBoard());
+//   int d;
+//   cin >>d;
+//   // root.SetChildren();
+//   create_tree((&root),d);
+//   tuple<int,MOVE> test = minimax(&root,true,-1000,1000);
+//   // cout<<test<<endl;
+//   // vector<Node*> succ = root.GetChildren();
+//   // Node* child_1 = succ[0];
+//   // vector<Node*> succ2 = (*child_1).GetChildren();
+//   // cout<<succ2.size()<<endl;
+//   // Node* child_2 = succ2[0];
+//   // print_board_new((*child_1).GetBoard());
+//   // cout<<"----------------------------"<<endl;
+//   // print_board_new((*child_2).GetBoard());
+//
+//   // int d = 2;
+//   // for (int k = 0; k<succ.size(); k++){
+//   //   Node* child = succ[k];
+//   //   print_board_new((*child).GetBoard());
+//   //   cout<<"---------------------------"<<endl;
+//   // }
+//
+//   // (*child).SetChildren();
+//   //
+//   // // while (d != 0){
+//   // //   for (int k = 0; k < succ.size(); k++){
+//   // //       Node curr_child = succ[k];
+//   // //   }
+//   // //
+//   // // }
+//   // Node* one = succ[0];
+//   // vector<Node*> n = (*one).GetChildren();
+//   // cout<<n.size()<<endl;
+//   // cout<< succ<<endl;
+//   cout <<"Working"<<endl;
+//
+//   return 0;
+// }
