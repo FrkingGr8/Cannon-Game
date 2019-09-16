@@ -22,5 +22,5 @@ void print_board(vector<vector<int> >);
 void print_cannon(vector<CANNON>);
 void print_soldier(vector<coord>);
 void print_move(MOVE m);
-
+void printerr_move(MOVE m);
 #endif
