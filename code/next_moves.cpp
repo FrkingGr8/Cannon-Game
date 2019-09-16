@@ -10,11 +10,13 @@ vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, 
   tuple<vector<coord>,vector<coord> > tup = create_th_list();
   vector<coord> white_town_halls = get<0>(tup);
   vector<coord> black_town_halls = get<1>(tup);
-  vector<coord>own_town_halls;
+  vector<coord>own_town_halls,opposition_town_halls;
   if (black){
     own_town_halls = black_town_halls;
+    opposition_town_halls = white_town_halls;
   } else{
     own_town_halls = white_town_halls;
+    opposition_town_halls = black_town_halls;
   }
 
   //individual soldier's moves
@@ -27,7 +29,7 @@ vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, 
     possibilities.reserve(possibilities.size() + distance(curr_sol_moves.begin(),curr_sol_moves.end()));
     possibilities.insert(possibilities.end(),curr_sol_moves.begin(), curr_sol_moves.end());
   }
-  vector<MOVE> curr_cannon_moves = cannon_action(cannon_list,soldier_list, opp_soldier_list,own_town_halls);
+  vector<MOVE> curr_cannon_moves = cannon_action(cannon_list,soldier_list, opp_soldier_list,own_town_halls,opposition_town_halls);
   possibilities.reserve(possibilities.size() + distance(curr_cannon_moves.begin(),curr_cannon_moves.end()));
   possibilities.insert(possibilities.end(),curr_cannon_moves.begin(), curr_cannon_moves.end());
 
