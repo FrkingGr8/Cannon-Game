@@ -82,7 +82,7 @@ vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list
         shots.push_back(shot1);
         shots.push_back(shot2);
       }
-      if (contains(rb,all_soldiers) == false && contains(lb,all_ths) == false){
+      if (contains(rb,all_soldiers) == false && contains(rb,all_ths) == false){
         c_dest = rb;
         if (f.x < t.x){
           s_move = f;
@@ -122,7 +122,7 @@ vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list
         shots.push_back(shot1);
         shots.push_back(shot2);
       }
-      if (contains(rb,all_soldiers) == false && contains(lb,all_ths) == false){
+      if (contains(rb,all_soldiers) == false && contains(rb,all_ths) == false){
         c_dest = rb;
         if (f.y < t.y){
           s_move = f;
@@ -165,7 +165,7 @@ vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list
         shots.push_back(shot1);
         shots.push_back(shot2);
       }
-      if (contains(rb,all_soldiers) == false && contains(lb,all_ths) == false){
+      if (contains(rb,all_soldiers) == false && contains(rb,all_ths) == false){
         c_dest = rb;
         if (f.x < t.x){
           s_move = f;
@@ -209,7 +209,7 @@ vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list
         shots.push_back(shot1);
         shots.push_back(shot2);
       }
-      if (contains(rb,all_soldiers) == false && contains(lb,all_ths) == false){
+      if (contains(rb,all_soldiers) == false && contains(rb,all_ths) == false){
         c_dest = rb;
         if (f.x < t.x){
           s_move = f;
