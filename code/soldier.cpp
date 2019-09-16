@@ -48,11 +48,11 @@ vector<coord> soldier_moves(coord soldier, vector<coord> op_soldier_list, bool b
 		if (i == 0){
 			continue;
 		} else{
-			new_coord.x = soldier.x + i;
-			if (contains(new_coord,op_soldier_list)){
-				adj = true;
-				capture_and_retreat.push_back(new_coord);
-			}
+			// new_coord.x = soldier.x + i;
+			// if (contains(new_coord,op_soldier_list)){
+			// 	adj = true;
+			// 	capture_and_retreat.push_back(new_coord);
+			// }
 		}
 	}
 
