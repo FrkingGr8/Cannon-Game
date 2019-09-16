@@ -1,21 +1,6 @@
 #include "next_moves.h"
 
-tuple<vector<coord>,vector<coord> > create_th_list(){
-  coord a,b,c,d,e,f,g,h;
-  //White TH
-  a = {0,0};
-  b = {2,0};
-  c = {4,0};
-  d = {6,0};
-  //Black TH
-  e = {1,7};
-  f = {3,7};
-  g = {5,7};
-  h = {7,7};
-  vector<coord> white_th = {a,b,c,d};
-  vector<coord> black_th = {e,f,g,h};
-  return (make_tuple(white_th,black_th));
-}
+
 
 vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, vector<coord> opp_soldier_list, bool black) {
   int l = 8;
@@ -42,7 +27,7 @@ vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, 
     possibilities.reserve(possibilities.size() + distance(curr_sol_moves.begin(),curr_sol_moves.end()));
     possibilities.insert(possibilities.end(),curr_sol_moves.begin(), curr_sol_moves.end());
   }
-  vector<MOVE> curr_cannon_moves = cannon_action(cannon_list,soldier_list, opp_soldier_list);
+  vector<MOVE> curr_cannon_moves = cannon_action(cannon_list,soldier_list, opp_soldier_list,own_town_halls);
   possibilities.reserve(possibilities.size() + distance(curr_cannon_moves.begin(),curr_cannon_moves.end()));
   possibilities.insert(possibilities.end(),curr_cannon_moves.begin(), curr_cannon_moves.end());
 

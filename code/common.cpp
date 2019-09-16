@@ -27,6 +27,23 @@ vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int 
 	return correct_moves;
 }
 
+tuple<vector<coord>,vector<coord> > create_th_list(){
+  coord a,b,c,d,e,f,g,h;
+  //White TH
+  a = {0,0};
+  b = {2,0};
+  c = {4,0};
+  d = {6,0};
+  //Black TH
+  e = {1,7};
+  f = {3,7};
+  g = {5,7};
+  h = {7,7};
+  vector<coord> white_th = {a,b,c,d};
+  vector<coord> black_th = {e,f,g,h};
+  return (make_tuple(white_th,black_th));
+}
+
 void print_cannon(vector<CANNON> list){
     for(int i = 0; i<list.size(); i++){
         CANNON temp = list[i];

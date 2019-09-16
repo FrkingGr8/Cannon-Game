@@ -42,7 +42,7 @@ MOVE cannon_coord_to_move(coord soldier, coord move, int n, int m){
   return tmp;
 }
 
-vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list, vector<coord> opp_soldier_list){
+vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list, vector<coord> opp_soldier_list, vector<coord> own_ths){
   vector<MOVE> possibilities;
   vector<coord> all_soldiers;
   all_soldiers.insert(all_soldiers.end(),soldier_list.begin(),soldier_list.end());
@@ -228,6 +228,7 @@ vector<MOVE> cannon_action(vector<CANNON> cannon_list,vector<coord> soldier_list
       }
     }
     vector<coord> filter_shots = moves_filter(shots,soldier_list);
+    filter_shots = moves_filter(filter_shots,own_ths);
     vector<MOVE> cannon_shots = cannon_coord_to_shot(s,filter_shots);
     possibilities.insert(possibilities.end(),cannon_shots.begin(),cannon_shots.end());
     possibilities.insert(possibilities.end(),cannon_moves.begin(),cannon_moves.end());
