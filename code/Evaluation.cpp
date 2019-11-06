@@ -6,10 +6,10 @@ float Eval(vector<vector<int> > board,  int type){
     tuple<vector<CANNON>, vector<CANNON> > cannon_list = Update(board);
     int w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12;
     w1 = 2;
-    w2 = -4;
+    w2 = -10;
     
-    w3 = 6;
-    w4 = -6;
+    w3 = 5;
+    w4 = -30;
     
     w5 = 50;
     w6 = -50;
