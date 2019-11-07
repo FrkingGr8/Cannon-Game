@@ -71,7 +71,7 @@ int main(int argc, char const *argv[]) {
       my_turn = true;
     }else{
       // cout<<"Best Move from player side: ";
-      int depth = 1;
+      int depth = 2;
       // Node curr_root;
       curr_root.SetBoard(board);
       create_tree(&curr_root,depth);

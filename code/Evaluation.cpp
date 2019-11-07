@@ -5,14 +5,14 @@ float Eval(vector<vector<int> > board,  int type){
     float ans = 0;
     tuple<vector<CANNON>, vector<CANNON> > cannon_list = Update(board);
     int w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12;
-    w1 = 2;
-    w2 = -6;
+    w1 = 1;
+    w2 = -3;
     
-    w3 = 5;
-    w4 = -20;
+    w3 = 2;
+    w4 = -6;
     
-    w5 = 50;
-    w6 = -150;
+    w5 = 20;
+    w6 = -20;
     
     w7 = -200;
     w8 = 100;
@@ -20,8 +20,8 @@ float Eval(vector<vector<int> > board,  int type){
     w9 = 200;
     w10 = -100;
     
-    w11 = 8;
-    w12 = -8;
+    w11 = 2;
+    w12 = -5;
     vector<coord> Black_S_list = Soldiers_list(1, board);
     vector<coord> White_S_list = Soldiers_list(-1, board);
     vector<CANNON> White_C_list = get<0>(cannon_list);
@@ -71,7 +71,6 @@ float Eval(vector<vector<int> > board,  int type){
 
 
     }else{//White
-        cerr<<"In here";
         no_of_enemy_soldier = d;
         no_of_soldier = c;
         
@@ -101,7 +100,7 @@ float Eval(vector<vector<int> > board,  int type){
     ans = (float)(ans) + (float)(w5*town) + (float)(w6*oppn_town);
     //ans = (float)(ans) + (float)(w7*oppn_soldier_from_town) + (float)(w8*soldier_from_town);
     //ans = (float)(ans) + (float)(w9*oppn_soldier_from_oppn_town) + (float)(w10*oppn_soldier_from_oppn_town);
-    //ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
+    ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
     return ans;
 
 }
