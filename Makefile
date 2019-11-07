@@ -1,3 +1,3 @@
 OUTFILE="run.out"
 compile:
-	@g++ -I ./headers/ -o $(OUTFILE) code/*.cpp
+	@g++ -I ./headers/ -O3 -o $(OUTFILE) code/*.cpp

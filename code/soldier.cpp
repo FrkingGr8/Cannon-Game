@@ -42,17 +42,17 @@ vector<coord> soldier_moves(coord soldier, vector<coord> op_soldier_list, bool b
       only_retreat.y = soldier.y - 1; //behind
     }
 		only_retreat.x = soldier.x + i;
-		if (contains(only_retreat,op_soldier_list) == true){
-			adj = true;
-		}
+		// if (contains(only_retreat,op_soldier_list) == true){
+		// 	adj = true;
+		// }
 		if (i == 0){
 			continue;
 		} else{
-			// new_coord.x = soldier.x + i;
-			// if (contains(new_coord,op_soldier_list)){
-			// 	adj = true;
-			// 	capture_and_retreat.push_back(new_coord);
-			// }
+			new_coord.x = soldier.x + i;
+			if (contains(new_coord,op_soldier_list)){
+				adj = true;
+				capture_and_retreat.push_back(new_coord);
+			}
 		}
 	}
 

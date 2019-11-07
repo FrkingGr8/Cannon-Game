@@ -69,10 +69,10 @@ int main(int argc, char const *argv[]) {
       my_turn = true;
     }else{
       // cout<<"Best Move from player side: ";
-      int depth = 2;
+      int depth = 3;
       // Node curr_root;
       curr_root.SetBoard(board);
-      create_tree(&curr_root,0);
+      create_tree(&curr_root,depth);
       tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000);
       MOVE m = get<1>(best_tuple);
       // cout<<"Best Move from player side: ";

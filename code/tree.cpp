@@ -5,7 +5,7 @@
 //d = 2 reasonable
 void create_tree(Node* root,int d){
   (*root).SetChildren();
-  while (d != 0){
+  while (d != 0 && ((*root).GetChildren().size())!=0){
     d--;
     vector<Node*> succ = (*root).GetChildren();
     // cout<<"Current depth: "<<d+1<<" Number of children = "<<succ.size()<<endl;
