@@ -2,18 +2,23 @@
 #include "tree.h"
 
 int main(int argc, char const *argv[]) {
-  int player,n,m,tl;
+  int player,n,m,tl,b_size;
   cin >> player;
   cin >> n;
   cin >> m;
   cin >> tl;
+  if (n == 8 && m == 8){
+    b_size=1;
+  }else if (n == 10 && m == 8){
+    b_size=2;
+  }else{
+    b_size=3;
+  }
 
   char f,s;
   int a,b,c,d;
   bool my_turn,amBlack;
-  cerr<<player<<" "<<tl<<" "<<n<<" "<<m<<endl;
   Node curr_root;
-  // cerr <<"tst"<<endl;
   if (player == 1){
       my_turn = true; //my_color = black
       curr_root.SetBlack(true);
@@ -24,17 +29,13 @@ int main(int argc, char const *argv[]) {
     amBlack=false;
   }
 
-  vector<vector<int> >  board = initialise();
+  vector<vector<int> >  board = initialise(b_size);
 
   while (true){
-    // cerr<<"Tes5t"<<endl;
     if (my_turn == false){
-      //cerr<<"Move from computer: "<<my_turn<<endl;
       char t[10];
       cin >> f;
-      // cerr<< f;
       cin >> a;
-      // cerr<< a;
       cin >> b;
       cin >> s;
       cin >> c;
@@ -70,22 +71,16 @@ int main(int argc, char const *argv[]) {
       board = Update_board(m,board);
       my_turn = true;
     }else{
-      // cout<<"Best Move from player side: ";
       int depth = 2;
-      // Node curr_root;
       curr_root.SetBoard(board);
       create_tree(&curr_root,depth);
       tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
       MOVE m = get<1>(best_tuple);
-      // cout<<"Best Move from player side: ";
       print_move(m);
-      // cout<<endl;
       board = Update_board(m,board);
       my_turn = false;
     }
   }
 
-
-  /* code */
   return 0;
 }
