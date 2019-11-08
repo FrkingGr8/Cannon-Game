@@ -1,6 +1,7 @@
 #include "minimax.h"
 #include "tree.h"
-
+#include <cmath>
+#include "time.h"
 int main(int argc, char const *argv[]) {
   int player,n,m,tl;
   cin >> player;
@@ -84,7 +85,44 @@ int main(int argc, char const *argv[]) {
       my_turn = false;
     }
   }
+  // srand(time(0));
+  // Node root;
+  // int depth = stoi(argv[1]) ;
+  // vector<vector<int> > b = initialise();
+  // root.SetBoard(b);
+  // create_tree(&root,depth);
+  // vector<Node*> succ = (root).GetChildren();
+  // cout<<succ.size()<<" ";
+  
+  // // bool f = true;
+  // // int level = 0;
 
+  // Node a = (*succ[0]);
+  // vector<Node*> succ2 = (a).GetChildren();
+  // cout<<succ2.size()<<" ";
+  
+  // if (succ2.size() != 0){
+  //   Node c = (*succ2[0]);
+  //   vector<Node*> succ3 = (c).GetChildren();
+  //   cout<<succ3.size()<<" ";
+  // }
+
+  // cout<<endl;
+
+
+  // while (f){
+  // cout<<"Level: "<<level<<" "<<succ.size()<<endl;
+  // int a = floor(((rand()%100) * succ.size())/100);
+  // cout<<"Picking the child "<<a<<" randomly, its children: ";
+  // vector<Node*> succ2 = (*succ[a]).GetChildren();
+  // cout<<succ2.size()<<" ";
+  // cout<<endl;
+  // if (succ2.size() == 0){
+  //   f = false;
+  // }
+  // succ = succ2;
+  // level++;
+  // }
 
   /* code */
   return 0;
