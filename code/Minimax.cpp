@@ -43,8 +43,8 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta,
 
             alpha = max(alpha, best);
             // Alpha Beta Pruning
-            // if (beta <= alpha)
-            //     break;
+            if (beta <= alpha)
+                break;
         }
         (*node).SetEval(best);
         // cout<<best<<" "<<(*node).GetEval()<<endl;
@@ -67,8 +67,8 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta,
             best = min(best, val);
             beta = min(beta, best);
             // Alpha Beta Pruning
-            // if (beta <= alpha)
-            //     break;
+            if (beta <= alpha)
+                break;
         }
         (*node).SetEval(best);
         // cout<<best<<" "<<(*node).GetEval()<<endl;
