@@ -34,7 +34,7 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta)
 
             tuple<int,MOVE> tup_val = minimax( (list[i]), false, alpha, beta);
             int val = get<0>(tup_val);
-            if (best>=val){
+            if (best<=val){
               best_move = (*(list[i])).GetMove();
             }
             best = max(best, val);
@@ -59,7 +59,7 @@ tuple<int,MOVE> minimax( Node *node, bool maximizingPlayer, int alpha, int beta)
             tuple<int,MOVE> tup_val = minimax( (list[i]),true, alpha, beta);
             int val = get<0>(tup_val);
 
-            if (best<=val){
+            if (best>=val){
               best_move = (*(list[i])).GetMove();
             }
             best = min(best, val);

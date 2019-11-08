@@ -8,7 +8,7 @@ float Eval(vector<vector<int> > board,  int type){
     w1 = 2;
     w2 = -4;
     
-    w3 = 6;
+    w3 = 3;
     w4 = -6;
     
     w5 = 50;
@@ -17,11 +17,11 @@ float Eval(vector<vector<int> > board,  int type){
     w7 = -200;
     w8 = 100;
     
-    w9 = 200;
-    w10 = -100;
+    w9 = -200;
+    w10 = 100;
     
-    w11 = 8;
-    w12 = -8;
+    w11 = 5;
+    w12 = -4;
 
     vector<coord> Black_S_list = Soldiers_list(1, board);
     vector<coord> White_S_list = Soldiers_list(-1, board);
@@ -105,9 +105,9 @@ float Eval(vector<vector<int> > board,  int type){
     ans = (float)(w1*no_of_soldier) + (float)(w2*no_of_enemy_soldier);
     ans = (float)(ans) + (float)(w3*no_of_cannon) + (float)(w4*oppn_no_of_cannon);
     ans = (float)(ans) + (float)(w5*town) + (float)(w6*oppn_town);
-    //ans = (float)(ans) + (float)(w7*oppn_soldier_from_town) + (float)(w8*soldier_from_town);
-    //ans = (float)(ans) + (float)(w9*oppn_soldier_from_oppn_town) + (float)(w10*oppn_soldier_from_oppn_town);
-    //ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
+    // ans = (float)(ans) + (float)(w7*oppn_soldier_from_town) + (float)(w8*soldier_from_town);
+    ans = (float)(ans) + (float)(w9*oppn_soldier_from_oppn_town) + (float)(w10*oppn_soldier_from_oppn_town);
+    ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
     return ans;
 
 }
