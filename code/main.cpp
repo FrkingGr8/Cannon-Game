@@ -10,16 +10,18 @@ int main(int argc, char const *argv[]) {
 
   char f,s;
   int a,b,c,d;
-  bool my_turn;
+  bool my_turn,amBlack;
   cerr<<player<<" "<<tl<<" "<<n<<" "<<m<<endl;
   Node curr_root;
   // cerr <<"tst"<<endl;
   if (player == 1){
       my_turn = true; //my_color = black
       curr_root.SetBlack(true);
+      amBlack=true;
   }else{
     my_turn = false; //my_color = white
     curr_root.SetBlack(false);
+    amBlack=false;
   }
 
   vector<vector<int> >  board = initialise();
@@ -72,8 +74,8 @@ int main(int argc, char const *argv[]) {
       int depth = 2;
       // Node curr_root;
       curr_root.SetBoard(board);
-      create_tree(&curr_root,0);
-      tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000);
+      create_tree(&curr_root,depth);
+      tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
       MOVE m = get<1>(best_tuple);
       // cout<<"Best Move from player side: ";
       print_move(m);
