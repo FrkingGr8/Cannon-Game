@@ -1,29 +1,50 @@
 #include "cannon_list.h"
 //Initialising the board
-vector<vector<int> > initialise(){
+vector<vector<int> > initialise(int b_size){
+    int n,m;
+    if (b_size == 1){
+        n=8;
+        m=8;
+    }else if (b_size==2){
+        n=10;
+        m=8;
+    }else{
+        n=10;
+        m=10;
+    }
     vector<vector<int> > board;
-    for(int i = 0; i<8; i++){
+    for(int i = 0; i<n; i++){
         vector<int> temp;
-        for(int j = 0; j<8; j++){
+        for(int j = 0; j<m; j++){
             temp.push_back(0);
         }
         board.push_back(temp);
     }
+    for (int j = 0; j<m;j+=2){
+        // Townhalls
+        board[0][j] = -2;
+        board[n-1][j+1] = 2;
+        //Soldiers
+        for (int i = 0; i<3;i++){
+            board[i][j+1]= -1;
+            board[n-1-i][j] = 1;
+        }
+    }
     //Position of townhall
-    board[0][0] = -2; board[0][2] = -2; board[0][4] = -2; board[0][6] = -2;
-    board[7][1] = 2; board[7][3] = 2; board[7][5] = 2; board[7][7] = 2;
+    // board[0][0] = -2; board[0][2] = -2; board[0][4] = -2; board[0][6] = -2;
+    // board[n-1][1] = 2; board[n-1][3] = 2; board[n-1][5] = 2; board[n-1][7] = 2;
 
     //Position of soldiers
     //White
-    board[0][1] = -1; board[1][1] = -1; board[2][1] = -1;
-    board[0][3] = -1; board[1][3] = -1; board[2][3] = -1;
-    board[0][5] = -1; board[1][5] = -1; board[2][5] = -1;
-    board[0][7] = -1; board[1][7] = -1; board[2][7] = -1;
+    // board[0][1] = -1; board[1][1] = -1; board[2][1] = -1;
+    // board[0][3] = -1; board[1][3] = -1; board[2][3] = -1;
+    // board[0][5] = -1; board[1][5] = -1; board[2][5] = -1;
+    // board[0][7] = -1; board[1][7] = -1; board[2][7] = -1;
     //Black
-    board[7][0] = 1; board[6][0] = 1; board[5][0] = 1;
-    board[7][2] = 1; board[6][2] = 1; board[5][2] = 1;
-    board[7][4] = 1; board[6][4] = 1; board[5][4] = 1;
-    board[7][6] = 1; board[6][6] = 1; board[5][6] = 1;
+    // board[7][0] = 1; board[6][0] = 1; board[5][0] = 1;
+    // board[7][2] = 1; board[6][2] = 1; board[5][2] = 1;
+    // board[7][4] = 1; board[6][4] = 1; board[5][4] = 1;
+    // board[7][6] = 1; board[6][6] = 1; board[5][6] = 1;
 
     return board;
 
@@ -95,9 +116,10 @@ bool Search(vector<CANNON> list, CANNON temp){
 //returns cannon list
 vector<CANNON> Get_list(int type, vector<vector<int> > board){
     vector<CANNON> list;
-    int n = 8;
-    int m = 8;
-
+    // int n = 8;
+    // int m = 8;
+    int n = board.size();
+    int m = board[0].size();
     for(int i = 0; i<n; i++){
         for (int j = 0; j<m; j++){
             if(board[i][j] == type){

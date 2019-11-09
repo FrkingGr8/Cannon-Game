@@ -2,12 +2,23 @@
 
 
 
-vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, vector<coord> opp_soldier_list, bool black) {
-  int l = 8;
-  int b = 8;
+vector<MOVE> next_moves(vector<CANNON> cannon_list, vector<coord> soldier_list, vector<coord> opp_soldier_list, bool black,int b_size) {
+  int l;
+  int b;
+  if (b_size ==1){
+    l=8;
+    b=8;
+  }else if (b_size==2){
+    l=8;
+    b=10;
+  }else{
+    l =10;
+    b =10;
+  }
+  // cout<<"l: "<<l<<" b: "<<b;
   vector<MOVE> possibilities;
   MOVE curr_move;
-  tuple<vector<coord>,vector<coord> > tup = create_th_list();
+  tuple<vector<coord>,vector<coord> > tup = create_th_list(b_size);
   vector<coord> white_town_halls = get<0>(tup);
   vector<coord> black_town_halls = get<1>(tup);
   vector<coord>own_town_halls,opposition_town_halls;

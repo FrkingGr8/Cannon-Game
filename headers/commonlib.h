@@ -17,7 +17,7 @@ typedef tuple<char,int,int,char,int,int> MOVE;
 
 bool contains(coord ele, vector<coord> list);
 vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int n = 8, int m = 8);
-tuple<vector<coord>,vector<coord> > create_th_list();
+tuple<vector<coord>,vector<coord> > create_th_list(int b_size);
 
 
 void print_board(vector<vector<int> >);
