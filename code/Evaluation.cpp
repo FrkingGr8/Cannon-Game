@@ -4,7 +4,7 @@
 float Eval(vector<vector<int> > board,  int type){
     int m, n;   //Configuration of board, n is no. of rows and m is no. of columns
     n = board.size();
-    m = board.size();
+    m = board[0].size();
 
     float ans = 0;
     tuple<vector<CANNON>, vector<CANNON> > cannon_list = Update(board);
@@ -38,12 +38,12 @@ float Eval(vector<vector<int> > board,  int type){
     vector<coord> White_S_list = Soldiers_list(-1, board);
     vector<CANNON> White_C_list = get<0>(cannon_list);
     vector<CANNON> Black_C_list = get<1>(cannon_list);
-    float no_of_soldier, no_of_enemy_soldier;  //done
-    float no_of_cannon, oppn_no_of_cannon; //done
-    float oppn_town, town;  //done
-    float oppn_soldier_from_town, soldier_from_town; //done
-    float soldier_from_oppn_town, oppn_soldier_from_oppn_town;//done
-    float oppn_blocked_cannon, blocked_cannon1; //done
+    float no_of_soldier = 0 , no_of_enemy_soldier = 0;  //done
+    float no_of_cannon = 0, oppn_no_of_cannon = 0; //done
+    float oppn_town = 0, town = 0;  //done
+    float oppn_soldier_from_town = 0, soldier_from_town = 0; //done
+    float soldier_from_oppn_town = 0, oppn_soldier_from_oppn_town = 0;//done
+    float oppn_blocked_cannon = 0, blocked_cannon1 = 0; //done
     //int total_moves_possible, oppn_total_moves_possible;
 
     float a = Black_C_list.size();
@@ -64,7 +64,7 @@ float Eval(vector<vector<int> > board,  int type){
         no_of_cannon = a;
         oppn_no_of_cannon = b;
 
-        for(int j = 1; j<m; j+2){
+        for(int j = 1; j<m; j+=2){
             town = town + abs(float(board[n-1][j]/2));
             oppn_town = oppn_town + abs(float(board[0][j-1]/2));
         }
