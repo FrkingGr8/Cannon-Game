@@ -8,7 +8,11 @@ float Eval(vector<vector<int> > board,  int type){
     w1 = 1;
     w2 = -3;
     
+<<<<<<< HEAD
     w3 = 2;
+=======
+    w3 = 3;
+>>>>>>> ce8c467868100d06e1e282ece065bd3a5523d437
     w4 = -6;
     
     w5 = 20;
@@ -20,8 +24,14 @@ float Eval(vector<vector<int> > board,  int type){
     w9 = -200;
     w10 = 100;
     
+<<<<<<< HEAD
     w11 = 2;
     w12 = -5;
+=======
+    w11 = 5;
+    w12 = -4;
+
+>>>>>>> ce8c467868100d06e1e282ece065bd3a5523d437
     vector<coord> Black_S_list = Soldiers_list(1, board);
     vector<coord> White_S_list = Soldiers_list(-1, board);
     vector<CANNON> White_C_list = get<0>(cannon_list);

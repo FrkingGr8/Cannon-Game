@@ -6,7 +6,7 @@
 void create_tree(Node* root,int d){
   (*root).SetChildren();
 
-  while (d != 0 ){
+  if (d != 0 ){
     d--;
     vector<Node*> succ = (*root).GetChildren();
     // if (succ.size()==0){
