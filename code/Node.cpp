@@ -31,6 +31,17 @@ Node* Node::newNode(vector<vector<int> > new_board, MOVE move, bool black ){
 
 //Use this function only once!
 void Node::SetChildren(){
+  int n = board_config.size();
+  int m = board_config[0].size();
+  // cout <<n<<" "<<m<<" ";
+  int b_size;
+  if (n==8){
+    b_size=1;
+  }else if(m == 8){
+    b_size =2;
+  }else{
+    b_size=3;
+  }
   vector<coord> black_soldiers = Soldiers_list(1,board_config);
   vector<coord> white_soldiers = Soldiers_list(-1,board_config);
   //first is black and second is white
@@ -40,9 +51,9 @@ void Node::SetChildren(){
   vector<MOVE> next_possibilities;
   children.clear();
   if (GetBlack() == true){
-    next_possibilities = next_moves(get<0>(cannon_lists),black_soldiers,white_soldiers,true);
+    next_possibilities = next_moves(get<0>(cannon_lists),black_soldiers,white_soldiers,true,b_size);
   }  else{
-    next_possibilities = next_moves(get<1>(cannon_lists),white_soldiers,black_soldiers,false);
+    next_possibilities = next_moves(get<1>(cannon_lists),white_soldiers,black_soldiers,false,b_size);
   }
   for (int j =0; j<next_possibilities.size();j++){
     MOVE curr_move = next_possibilities[j];

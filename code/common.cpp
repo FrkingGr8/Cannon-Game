@@ -27,20 +27,37 @@ vector<coord> moves_filter(vector<coord> moves, vector<coord> soldier_list, int 
 	return correct_moves;
 }
 
-tuple<vector<coord>,vector<coord> > create_th_list(){
-  coord a,b,c,d,e,f,g,h;
-  //White TH
-  a = {0,0};
-  b = {2,0};
-  c = {4,0};
-  d = {6,0};
-  //Black TH
-  e = {1,7};
-  f = {3,7};
-  g = {5,7};
-  h = {7,7};
-  vector<coord> white_th = {a,b,c,d};
-  vector<coord> black_th = {e,f,g,h};
+tuple<vector<coord>,vector<coord> > create_th_list(int b_size){
+  // coord a,b,c,d,e,f,g,h;
+  int n,m;
+  if (b_size == 1){
+    n=8;
+    m=8;
+  }else if (b_size==2){
+    n=10;
+    m=8;
+  }else{
+    n=10;
+    m=10;
+  }
+  vector<coord> white_th,black_th;
+  for (int i = 0; i< m; i+=2){
+    coord w_temp = {i,0},b_temp = {i+1,n-1};
+    white_th.push_back(w_temp);
+    black_th.push_back(b_temp);
+  }
+  // //White TH
+  // a = {0,0};
+  // b = {2,0};
+  // c = {4,0};
+  // d = {6,0};
+  // //Black TH
+  // e = {1,7};
+  // f = {3,7};
+  // g = {5,7};
+  // h = {7,7};
+  // vector<coord> white_th = {a,b,c,d};
+  // vector<coord> black_th = {e,f,g,h};
   return (make_tuple(white_th,black_th));
 }
 

@@ -25,8 +25,10 @@ vector<vector<int> > initialise(int b_size){
         board[0][j] = -2;
         board[n-1][j+1] = 2;
         //Soldiers
-        board[0][j+1]= -1;
-        board[n-1][j] = 1;
+        for (int i = 0; i<3;i++){
+            board[i][j+1]= -1;
+            board[n-1-i][j] = 1;
+        }
     }
     //Position of townhall
     // board[0][0] = -2; board[0][2] = -2; board[0][4] = -2; board[0][6] = -2;
@@ -114,9 +116,10 @@ bool Search(vector<CANNON> list, CANNON temp){
 //returns cannon list
 vector<CANNON> Get_list(int type, vector<vector<int> > board){
     vector<CANNON> list;
-    int n = 8;
-    int m = 8;
-
+    // int n = 8;
+    // int m = 8;
+    int n = board.size();
+    int m = board[0].size();
     for(int i = 0; i<n; i++){
         for (int j = 0; j<m; j++){
             if(board[i][j] == type){
