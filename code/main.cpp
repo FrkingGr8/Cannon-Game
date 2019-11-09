@@ -3,8 +3,14 @@
 #include <cmath>
 #include <time.h>
 // #include <chrono>
-int get_depth(int tl,int time_spent){
-  return 2;
+int get_depth(int time_spent,int dur,int curr_depth=2){
+  int t1=4,t2=1;
+  if (dur>=t1){
+    curr_depth--;
+  }else if(dur<=t2){
+    curr_depth++;
+  }
+  return curr_depth;
 }
 int main(int argc, char const *argv[]) {
   int player,n,m,tl,b_size;
@@ -35,8 +41,8 @@ int main(int argc, char const *argv[]) {
   }
 
   vector<vector<int> >  board = initialise(b_size);
-  long int time_spent = 0; 
-
+  long int time_spent = 0, dur = 0,depth=2; 
+  int my_move=0;
   while (true){
     if (my_turn == false){
       char t[10];
@@ -47,26 +53,60 @@ int main(int argc, char const *argv[]) {
       cin >> c;
       cin >> d;
       
-      MOVE m  = make_tuple(f,a,b,s,c,d);
+      MOVE mv  = make_tuple(f,a,b,s,c,d);
       cerr<<"Move from computer: ";
-      printerr_move(m);
+      printerr_move(mv);
       cerr<<endl;
-      board = Update_board(m,board);
+      board = Update_board(mv,board);
       my_turn = true;
     }else{
-
-      time_t curr = time(0);
-      int depth = get_depth(tl,time_spent);
-      curr_root.SetBoard(board);
-      create_tree(&curr_root,depth);
-      tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
-      MOVE m = get<1>(best_tuple);
-      print_move(m);
-      board = Update_board(m,board);
+      time_t curr = time(0);      
+      MOVE mv;
+        if (my_move==0){
+          if (amBlack){
+          if (n==10 && m==10){
+            mv = make_tuple('S',6,n-1,'M',7,n-2);
+          }else{
+            mv = make_tuple('S',4,n-1,'M',5,n-2);
+          }
+          }else{
+          if (n==10 && m==10){
+            mv = make_tuple('S',7,0,'M',8,1);
+          }else{
+            mv = make_tuple('S',5,0,'M',6,1);
+          }            
+          }
+        }else if (my_move==1){
+          if (amBlack){
+          mv = make_tuple('S',2,n-1,'M',3,n-2);
+          }else{
+          mv = make_tuple('S',3,0,'M',2,1);
+          }
+        }else{
+        if (m==10 && n==10 && my_move == 2){
+          if (amBlack){
+            mv = make_tuple('S',4,n-1,'M',4,n-4);
+          }else{
+            mv = make_tuple('S',5,0,'M',5,3);
+          }
+        }else{
+        depth = get_depth(time_spent,dur,depth);        
+        curr_root.SetBoard(board);
+        create_tree(&curr_root,depth);
+        tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
+        mv = get<1>(best_tuple);
+        }
+      }
+      print_move(mv);
+      cerr<<"Current Depth "<<depth<<endl;
+      board = Update_board(mv,board);
       my_turn = false;
+      
       time_t fin = time(0);
-      long int dur = difftime(fin,curr);
-      time_spent+=dur; 
+      dur = difftime(fin,curr);
+      time_spent+=dur;
+      my_move++;
+
     }
   }
 
