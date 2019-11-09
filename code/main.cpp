@@ -3,8 +3,14 @@
 #include <cmath>
 #include <time.h>
 // #include <chrono>
-int get_depth(int tl,int time_spent){
-  return 2;
+int get_depth(int time_spent,int dur,int curr_depth=2){
+  int t1=4,t2=1;
+  if (dur>=t1){
+    curr_depth--;
+  }else if(dur<=t2){
+    curr_depth++;
+  }
+  return curr_depth;
 }
 int main(int argc, char const *argv[]) {
   int player,n,m,tl,b_size;
@@ -35,7 +41,7 @@ int main(int argc, char const *argv[]) {
   }
 
   vector<vector<int> >  board = initialise(b_size);
-  long int time_spent = 0; 
+  long int time_spent = 0, dur = 0,depth=2; 
   int my_move=0;
   while (true){
     if (my_turn == false){
@@ -54,10 +60,7 @@ int main(int argc, char const *argv[]) {
       board = Update_board(mv,board);
       my_turn = true;
     }else{
-      time_t curr = time(0);
-
-      int depth = get_depth(tl,time_spent);
-      
+      time_t curr = time(0);      
       MOVE mv;
         if (my_move==0){
           if (amBlack){
@@ -87,6 +90,7 @@ int main(int argc, char const *argv[]) {
             mv = make_tuple('S',5,0,'M',5,3);
           }
         }else{
+        depth = get_depth(time_spent,dur,depth);        
         curr_root.SetBoard(board);
         create_tree(&curr_root,depth);
         tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
@@ -94,13 +98,13 @@ int main(int argc, char const *argv[]) {
         }
       }
       print_move(mv);
-      
+      cerr<<"Current Depth "<<depth<<endl;
       board = Update_board(mv,board);
       my_turn = false;
       
       time_t fin = time(0);
-      long int dur = difftime(fin,curr);
-      time_spent+=dur; 
+      dur = difftime(fin,curr);
+      time_spent+=dur;
       my_move++;
 
     }
