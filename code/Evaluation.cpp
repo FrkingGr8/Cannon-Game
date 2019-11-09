@@ -96,7 +96,7 @@ float Eval(vector<vector<int> > board,  int type){
         oppn_no_of_cannon = a;
         no_of_cannon = b;
 
-        for(int j = 1; j<m; j+2){
+        for(int j = 1; j<m; j+=2){
             town = town + abs(float(board[0][j]/2));
             oppn_town = oppn_town + abs(float(board[n-1][j-1]/2));
         }
