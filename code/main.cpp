@@ -1,6 +1,11 @@
 #include "minimax.h"
 #include "tree.h"
-
+#include <cmath>
+#include <time.h>
+// #include <chrono>
+int get_depth(int tl,int time_spent){
+  return 2;
+}
 int main(int argc, char const *argv[]) {
   int player,n,m,tl,b_size;
   cin >> player;
@@ -30,6 +35,7 @@ int main(int argc, char const *argv[]) {
   }
 
   vector<vector<int> >  board = initialise(b_size);
+  long int time_spent = 0; 
 
   while (true){
     if (my_turn == false){
@@ -41,29 +47,6 @@ int main(int argc, char const *argv[]) {
       cin >> c;
       cin >> d;
       
-      //cerr <<"testing "<<f<<endl;
-      // cin.getline(t, 10);
-      // cerr<<"yoyoyo"<<t<<endl;
-      // string temp;
-      // getline(cin, temp);
-      // if(getline(cin, temp)){
-      //   cerr <<"Yello";
-      //   cerr<<temp;
-      //   // return 0;
-      //   break;
-      // }
-      // cin>>temp;
-      // cerr<<temp;
-      
-      // cin >> f;
-      // cerr<< f;
-      // cin >> a;
-      // cerr<< a;
-      // cin >> b;
-      // cin >> s;
-      // cin >> c;
-      // cin >> d;
-      
       MOVE m  = make_tuple(f,a,b,s,c,d);
       cerr<<"Move from computer: ";
       printerr_move(m);
@@ -71,7 +54,9 @@ int main(int argc, char const *argv[]) {
       board = Update_board(m,board);
       my_turn = true;
     }else{
-      int depth = 2;
+
+      time_t curr = time(0);
+      int depth = get_depth(tl,time_spent);
       curr_root.SetBoard(board);
       create_tree(&curr_root,depth);
       tuple<int,MOVE> best_tuple = minimax(&curr_root,true,-1000,1000,amBlack);
@@ -79,8 +64,12 @@ int main(int argc, char const *argv[]) {
       print_move(m);
       board = Update_board(m,board);
       my_turn = false;
+      time_t fin = time(0);
+      long int dur = difftime(fin,curr);
+      time_spent+=dur; 
     }
   }
+
 
   return 0;
 }
