@@ -8,31 +8,28 @@ float Eval(vector<vector<int> > board,  int type){
 
     float ans = 0;
     tuple<vector<CANNON>, vector<CANNON> > cannon_list = Update(board);
-    float w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12;
+    float w1, w2, w3, w4, w5, w6, w7, w8;
     w1 = 1;    //Number of soldier  
-    w2 = -3;    //Number of enemy soldier
+    w2 = 2;    //Number of enemy soldier
     
-    w3 = 3;     //No. of cannon
-    w4 = -6;    //No. of enemy cannon
+    w3 = 1.5;     //No. of cannon
+    w4 = 1.75;    //No. of enemy cannon
     
-    w5 = 20;    //No. of town 
-    w6 = -20;   //No. of enemy town
-    
-    w7 = -200;  //No. of oppn soldier from town
-    w8 = 100;   //No. of soldier from town
-    
-    w9 = -200;  //oppn soldier from oppn town
-    w10 = 100;  //oppn soldier from oppn town
-    
-    w11 = 5;    //oppn blocked cannon
-    w12 = -4;   // blocked cannon
+    w5 = 1.6;    //oppn blocked cannon
+    w6 = 2;   // blocked cannon
+
+    w7 = 3;    //Our Attack line
+    w8 = 3.5;    //Opposition Attack line
+
+    float u = 20;    //No. of town 
+    float v = 20;   //No. of enemy town
 
     // ans = (float)(w1*no_of_soldier) + (float)(w2*no_of_enemy_soldier);
     // ans = (float)(ans) + (float)(w3*no_of_cannon) + (float)(w4*oppn_no_of_cannon);
-    // ans = (float)(ans) + (float)(w5*town) + (float)(w6*oppn_town);
-    //ans = (float)(ans) + (float)(w7*oppn_soldier_from_town) + (float)(w8*soldier_from_town);
-    //ans = (float)(ans) + (float)(w9*oppn_soldier_from_oppn_town) + (float)(w10*oppn_soldier_from_oppn_town);
-    // ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
+    // ans = (float)(ans) + (float)(w5*oppn_blocked_cannon) + (float)(w6*blocked_cannon1);
+    // ans = (float)(ans) + (float)(a_line)*w7 + (float)(a_opp_line)*w8;
+    // ans = (float)(ans) + (float)(u*town) + (float)(v*oppn_town);
+    
 
     vector<coord> Black_S_list = Soldiers_list(1, board);
     vector<coord> White_S_list = Soldiers_list(-1, board);
@@ -44,168 +41,63 @@ float Eval(vector<vector<int> > board,  int type){
     float oppn_soldier_from_town = 0, soldier_from_town = 0; //done
     float soldier_from_oppn_town = 0, oppn_soldier_from_oppn_town = 0;//done
     float oppn_blocked_cannon = 0, blocked_cannon1 = 0; //done
-    //int total_moves_possible, oppn_total_moves_possible;
+    float a_line = 0, a_opp_line = 0;
 
     float a = Black_C_list.size();
     float b = White_C_list.size();
 
     float c = White_S_list.size();
     float d = Black_S_list.size();
-    //This function assumes that atleast 1 soldier exists. 
-    // tuple<int, int> t1 = townhall_dist(Black_S_list, board); 
-    // tuple<int, int> t2 = townhall_dist(White_S_list, board);
+
     float e = blocked_cannon(Black_S_list, White_C_list);
     float f = blocked_cannon(White_S_list, Black_C_list);
 
+    float g = 10 - AttackLine(board, 1);
+    float h = (-1)*AttackLine(board, -1);
+
     if(type == 1){//Black 
         no_of_soldier = d;
-        no_of_enemy_soldier = c;
+        no_of_enemy_soldier = (-1)*c;
         
         no_of_cannon = a;
-        oppn_no_of_cannon = b;
+        oppn_no_of_cannon = (-1)*b;
 
         for(int j = 1; j<m; j+=2){
             town = town + abs(float(board[n-1][j]/2));
-            oppn_town = oppn_town + abs(float(board[0][j-1]/2));
+            oppn_town = oppn_town - abs(float(board[0][j-1]/2));
         }
-        int a_line = AttackLine(board, 1);
-        int a_opp_line = AttackLine(board, -1);
+        a_line = g;
+        a_opp_line = (-1)*h;
         
-        // town = abs(board[7][1]/2) + abs(board[7][3]/2) + abs(board[7][5]/2) + abs(board[7][7]/2);
-        // oppn_town = abs(board[0][0]/2) + abs(board[0][2]/2) + abs(board[0][4]/2) + abs(board[0][6]/2);
-        
-        // oppn_soldier_from_town = get<1>(t2);
-        // soldier_from_town = get<0>(t1);
-
-        // soldier_from_oppn_town = get<1>(t1);
-        // oppn_soldier_from_oppn_town = get<0>(t2);
-
-        blocked_cannon1 = f;
+        blocked_cannon1 = (-1)*f;
         oppn_blocked_cannon = e; 
-
-        // oppn_soldier_from_town = (float)(1/oppn_soldier_from_town);
-        // soldier_from_town = (float)(1/soldier_from_town);
-        // soldier_from_oppn_town = (float)(1/soldier_from_oppn_town);
-        // oppn_soldier_from_oppn_town = (float)(1/oppn_soldier_from_oppn_town);
-
-
     }else{//White
-        no_of_enemy_soldier = d;
+        no_of_enemy_soldier = (-1)*d;
         no_of_soldier = c;
         
-        oppn_no_of_cannon = a;
+        oppn_no_of_cannon = (-1)*a;
         no_of_cannon = b;
 
         for(int j = 1; j<m; j+=2){
-            town = town + abs(float(board[0][j]/2));
-            oppn_town = oppn_town + abs(float(board[n-1][j-1]/2));
+            town = town + abs(float(board[0][j-1]/2));
+            oppn_town = oppn_town - abs(float(board[n-1][j]/2));
         }
-        
-        // oppn_town = abs(board[7][1]/2) + abs(board[7][3]/2) + abs(board[7][5]/2) + abs(board[7][7]/2);
-        // town = abs(board[0][0]/2) + abs(board[0][2]/2) + abs(board[0][4]/2) + abs(board[0][6]/2);
-        
-        // oppn_soldier_from_town = get<1>(t1);
-        // soldier_from_town = get<0>(t2);
 
-        // soldier_from_oppn_town = get<1>(t2);
-        // oppn_soldier_from_oppn_town = get<0>(t1);
-
-        blocked_cannon1 = e;
+        blocked_cannon1 = (-1)*e;
         oppn_blocked_cannon = f;
 
-        int a_line = AttackLine(board, -1);
-        int a_opp_line = AttackLine(board, +1);
-
-        // oppn_soldier_from_town = (float)(1/oppn_soldier_from_town);
-        // soldier_from_town = (float)(1/soldier_from_town);
-        // soldier_from_oppn_town = (float)(1/soldier_from_oppn_town);
-        // oppn_soldier_from_oppn_town = (float)(1/oppn_soldier_from_oppn_town);
+        a_line = h;
+        a_opp_line = (-1)*g;
         }   
     
     ans = (float)(w1*no_of_soldier) + (float)(w2*no_of_enemy_soldier);
     ans = (float)(ans) + (float)(w3*no_of_cannon) + (float)(w4*oppn_no_of_cannon);
-    ans = (float)(ans) + (float)(w5*town) + (float)(w6*oppn_town);
-    //ans = (float)(ans) + (float)(w7*oppn_soldier_from_town) + (float)(w8*soldier_from_town);
-    //ans = (float)(ans) + (float)(w9*oppn_soldier_from_oppn_town) + (float)(w10*oppn_soldier_from_oppn_town);
-    ans = (float)(ans) + (float)(w11*oppn_blocked_cannon) + (float)(w12*blocked_cannon1);
+    ans = (float)(ans) + (float)(w5*oppn_blocked_cannon) + (float)(w6*blocked_cannon1);
+    ans = (float)(ans) + (float)(a_line)*w7 + (float)(a_opp_line)*w8;
+    ans = (float)(ans) + (float)(u*town) + (float)(v*oppn_town);
+
     return ans;
 
-}
-
-tuple<int, int> townhall_dist(vector<coord> Soldiers_list, vector<vector<int> > board){
-    tuple<int, int> ans;
-    int type = board[Soldiers_list[0].y][Soldiers_list[0].x];
-    int self = 0, oppn = 0;
-
-    for(int i = 0; i<Soldiers_list.size(); i++){
-        int x = Soldiers_list[i].y;
-        int y = Soldiers_list[i].x;
-        if(type>0){
-            self = self + abs(7-x);
-            oppn = oppn + abs(x);
-
-            //Self          
-            if(board[7][1]==2){
-                self = abs(1-y) + self;
-            }
-            if(board[7][3] == 2){
-                self = abs(3-y) + self;
-            }
-            if(board[7][3] == 2){
-                self = abs(5-y) + self;
-            }
-            if(board[7][5] == 2){
-                self = abs(7-y) + self;
-            }
-
-            //Oppn
-            if(board[0][0] == -2){
-                oppn = oppn + abs(y);
-            }
-            if(board[0][2] == -2){
-                oppn = oppn + abs(2-y);
-            }
-            if(board[0][4] == -2){
-                oppn = oppn + abs(4-y);
-            }
-            if(board[0][6] == -2){
-                oppn = oppn + abs(6-y);
-            }
-
-        }else{//White is the type of soldier
-            oppn = oppn + abs(x-7);
-            self = self + abs(x);
-            //oppn          
-            if(board[7][1]==2){
-                oppn = oppn + abs(1-y);
-            }
-            if(board[7][3] == 2){
-                oppn = oppn + abs(3-y);
-            }
-            if(board[7][3] == 2){
-                oppn = oppn + abs(5-y);
-            }
-            if(board[7][5] == 2){
-                oppn = oppn + abs(7-y);
-            }
-
-            //self
-            if(board[0][0] == -2){
-                self = self + abs(0-y);
-            }
-            if(board[0][2] == -2){
-                self = self + abs(2-y);
-            }
-            if(board[0][4] == -2){
-                self = self + abs(4-y);
-            }
-            if(board[0][6] == -2){
-                self = self + abs(6-y);
-            }
-        }
-    }
-    ans = make_tuple(self, oppn);
-    return ans;
 }
 
 
