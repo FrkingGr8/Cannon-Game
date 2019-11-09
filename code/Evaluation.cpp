@@ -10,12 +10,12 @@ float Eval(vector<vector<int> > board,  int type){
     tuple<vector<CANNON>, vector<CANNON> > cannon_list = Update(board);
     float w1, w2, w3, w4, w5, w6, w7, w8;
     w1 = 1;    //Number of soldier  
-    w2 = 2;    //Number of enemy soldier
+    w2 = 5;    //Number of enemy soldier
     
-    w3 = 1.5;     //No. of cannon
-    w4 = 1.75;    //No. of enemy cannon
+    w3 = 3;     //No. of cannon
+    w4 = 5;    //No. of enemy cannon
     
-    w5 = 1.6;    //oppn blocked cannon
+    w5 = 2.5;    //oppn blocked cannon
     w6 = 2;   // blocked cannon
 
     w7 = 3;    //Our Attack line
@@ -94,7 +94,7 @@ float Eval(vector<vector<int> > board,  int type){
     ans = (float)(ans) + (float)(w3*no_of_cannon) + (float)(w4*oppn_no_of_cannon);
     ans = (float)(ans) + (float)(w5*oppn_blocked_cannon) + (float)(w6*blocked_cannon1);
     ans = (float)(ans) + (float)(a_line)*w7 + (float)(a_opp_line)*w8;
-    ans = (float)(ans) + (float)(u*town) + (float)(v*oppn_town);
+    // ans = (float)(ans) + (float)(u*town) + (float)(v*oppn_town);
 
     return ans;
 
